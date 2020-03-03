@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Carros"),
+        title: Text("Melhorar o Layout"),
       ),
       body: _body(),
     );
@@ -66,7 +66,8 @@ class _LoginState extends State<Login> {
               focusNode: _focusNode
             ),
             SizedBox(height: 20,),
-            _circularProgressIndicator ? Center(child: CircularProgressIndicator(),) : AppButton("Login", onPressed: _onClickLogin,)
+            _circularProgressIndicator ? Center(child: CircularProgressIndicator(),) : AppButton("Login", onPressed: _onClickLogin,),
+
           ],
         ),
       ),
