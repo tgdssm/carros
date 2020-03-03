@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:cars/screens/api_response.dart';
-import 'package:cars/screens/user.dart';
+import 'package:cars/login/api_response.dart';
+import 'package:cars/login/user.dart';
 import 'package:http/http.dart' as http;
 
 class LoginApi {
