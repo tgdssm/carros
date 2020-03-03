@@ -21,6 +21,8 @@ class _LoginState extends State<Login> {
 
   final _focusNode = FocusNode();
 
+  bool _circularProgressIndicator = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +66,7 @@ class _LoginState extends State<Login> {
               focusNode: _focusNode
             ),
             SizedBox(height: 20,),
-            AppButton("Login", onPressed: _onClickLogin,)
+            _circularProgressIndicator ? Center(child: CircularProgressIndicator(),) : AppButton("Login", onPressed: _onClickLogin,)
           ],
         ),
       ),
@@ -72,6 +74,9 @@ class _LoginState extends State<Login> {
   }
 
   void _onClickLogin() async{
+    setState(() {
+      _circularProgressIndicator = true;
+    });
     if(!_formKey.currentState.validate()){
       return;
     }
@@ -82,7 +87,7 @@ class _LoginState extends State<Login> {
     if(resposta.ok){
       Usuario user = resposta.resultado;
       print(user);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
     }else{
       showDialog(
           context: context,
@@ -100,6 +105,8 @@ class _LoginState extends State<Login> {
           }
       );
     }
-
+    setState(() {
+      _circularProgressIndicator = false;
+    });
   }
 }

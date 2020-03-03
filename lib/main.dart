@@ -1,4 +1,5 @@
 import 'package:cars/screens/login_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        //brightness: Brightness.dark,
         primarySwatch: Colors.blue,
       ),
       home: Login(),
