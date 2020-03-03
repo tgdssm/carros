@@ -1,3 +1,7 @@
+import 'package:cars/screens/api_response.dart';
+import 'package:cars/screens/home_page.dart';
+import 'package:cars/screens/login_api.dart';
+import 'package:cars/screens/user.dart';
 import 'package:cars/widgets/button.dart';
 import 'package:cars/widgets/text_form_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,8 +55,8 @@ class _LoginState extends State<Login> {
                 if(texto.isEmpty){
                   return "Digite a senha";
                 }
-                if(texto.length < 8){
-                  return "A senha precisa ter pelo menos 8 digitos";
+                if(texto.length < 3){
+                  return "A senha precisa ter pelo menos 3 digitos";
                 }
                 return null;
               },
@@ -67,11 +71,35 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void _onClickLogin() {
+  void _onClickLogin() async{
     if(!_formKey.currentState.validate()){
       return;
     }
     String login = _login.text;
     String senha = _senha.text;
+
+    ApiResponse resposta = await LoginApi.login(login, senha);
+    if(resposta.ok){
+      Usuario user = resposta.resultado;
+      print(user);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+    }else{
+      showDialog(
+          context: context,
+          builder: (context){
+            return AlertDialog(
+              title: Text("Carros"),
+              content: Text(resposta.mensagem),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          }
+      );
+    }
+
   }
 }
